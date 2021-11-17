@@ -16,7 +16,6 @@ export const LocationList = () => {
 
     return (
         <>
-            <div>{LocationsList</div>
             {
                 locations.map(
                     (location) => {
