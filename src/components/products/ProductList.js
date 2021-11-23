@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react"
 
 export const ProductList = () => {
-    const [products, changeProduct] = useState([])
+    const [products, updateProducts] = useState([])
     const [productTypes, setProductType] = useState("")
     const [prices, setPrice] = useState("")
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/products")
+            fetch("http://localhost:8088/products?_expand=productType")
             .then(res => res.json())
             .then((data) => {
-                changeProduct(data)
+                updateProducts(data)
             })
         },
         []
@@ -30,12 +30,10 @@ export const ProductList = () => {
 
     return (
         <>
-            <div>Product Types: { productTypes }</div>
-            <div>Prices: { prices }</div>
             {
                 products.map(
                     (product) => {
-                        return <p key={`product--${product.id}`}>{product.name}</p>
+                        return <p key={`product--${product.id}`}>{product.name} is a {product.productType.name} kind of candy and costs {product.price}</p>
                     }
                 )
             }
